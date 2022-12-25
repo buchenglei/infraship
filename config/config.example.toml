@@ -1,0 +1,37 @@
+[app]
+name = "appname"
+version = "v1.0.0"
+maintainers = ["xxx1", "xxx2"]
+env = "prod"
+
+[server.http]
+addr = "127.0.0.1"
+port = 7890
+timeout = "30s"
+
+[server.grpc]
+addr = "127.0.0.1"
+port = 8890
+
+[infra.mysql]
+[infra.redis]
+
+[domain]
+public_1 = "domain公共配置1"
+public_2 = "domain公共配置2"
+
+[domain.service]
+[domain.service.xxx]
+
+[domain.usecase]
+[domain.usecase.xxx]
+
+[domain.entity]
+public_1 = "实体公共配置1"
+public_2 = "实体公共配置2"
+
+[domain.entity.entity1]
+name = "Tom"
+age = 100
+
+[domain.repo]
