@@ -55,3 +55,18 @@ func (r *RwLockMap[K, V]) Range(f func(K, V) error) {
 func (r *RwLockMap[K, V]) Count() int {
 	return len(r.saved)
 }
+
+func (r *RwLockMap[K, V]) Update(key K, updater func(v V) (V, error)) {
+	r.lock.Lock()
+	defer r.lock.Unlock()
+
+	v, ok := r.saved[key]
+	if !ok {
+		return
+	}
+	newV, err := updater(v)
+	if err != nil {
+		return
+	}
+	r.saved[key] = newV
+}
