@@ -120,7 +120,7 @@ func (a *Application) watchSysSignal() {
 	//创建监听退出chan
 	c := make(chan os.Signal, 1)
 	//监听指定信号 ctrl+c kill
-	signal.Notify(c, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGUSR1, syscall.SIGUSR2)
+	signal.Notify(c, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 	<-c
 	a.shutdown(rcvSysStopSignal)
 }
