@@ -13,25 +13,25 @@ timeout = "30s"
 addr = "127.0.0.1"
 port = 8890
 
-[infra.mysql]
-[infra.redis]
-
 [domain]
 public_1 = "domain公共配置1"
 public_2 = "domain公共配置2"
 
-[domain.service]
-[domain.service.xxx]
+    [domain.service]
+    [domain.service.xxx]
 
-[domain.usecase]
-[domain.usecase.xxx]
+    [domain.usecase]
+    [domain.usecase.xxx]
 
-[domain.entity]
-public_1 = "实体公共配置1"
-public_2 = "实体公共配置2"
+    [domain.entity]
+    public_1 = "实体公共配置1"
+    public_2 = "实体公共配置2"
 
-[domain.entity.entity1]
-name = "Tom"
-age = 100
+    [domain.entity.entity1]
+    name = "Tom"
+    age = 100
 
-[domain.repo]
+    [domain.repo]
+
+[infra.mysql]
+[infra.redis]

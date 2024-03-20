@@ -15,6 +15,7 @@ type MysqlConfig struct {
 	MaxIdleConns    int
 	MaxOpenConns    int
 	ConnMaxLifetime time.Duration
+	DevMode         bool
 }
 
 type MysqlConnector struct {
@@ -46,6 +47,10 @@ func (m *MysqlConnector) Connect(ctx context.Context) (*gorm.DB, error) {
 		db, err = gorm.Open(mysql.Open(m.conf.DSN), &gorm.Config{})
 		if err != nil {
 			return
+		}
+
+		if m.conf.DevMode {
+			db = db.Debug()
 		}
 
 		sqlDB, err = db.DB()

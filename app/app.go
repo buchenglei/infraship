@@ -13,7 +13,7 @@ import (
 type Runner interface {
 	Name() string
 	Run(context.Context) error
-	Reload(context.Context) error
+	// Reload(context.Context) error
 	Exit(context.Context) error
 }
 

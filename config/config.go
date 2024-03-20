@@ -5,14 +5,9 @@ import (
 	"io"
 	"strings"
 
-	"github.com/buchenglei/infraship/skeleton"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 )
-
-type ConfigFinder skeleton.Finder[string, any]
-
-var _ ConfigFinder = &Config{}
 
 type Config struct {
 	Viper *viper.Viper
@@ -43,15 +38,6 @@ func (c *Config) Sub(prefix string) (*Config, error) {
 	}, nil
 }
 
-func (c *Config) Find(k string) (any, error) {
-	v := c.Viper.Get(k)
-	if v == nil {
-		return nil, skeleton.ErrKeyNotExist
-	}
-
-	return v, nil
-}
-
 func (c *Config) UnmarshalALL(v interface{}) error {
 	return c.Unmarshal("", v)
 }
@@ -79,4 +65,28 @@ func (c *Config) Unmarshal(prefix string, v interface{}) error {
 	}
 
 	return nil
+}
+
+func (c *Config) GetString(k string, defaults ...string) string {
+	if !c.Viper.InConfig(k) && len(defaults) == 1 {
+		return defaults[0]
+	}
+
+	return c.Viper.GetString(k)
+}
+
+func (c *Config) GetInt(k string, defaults ...int) int {
+	if !c.Viper.InConfig(k) && len(defaults) == 1 {
+		return defaults[0]
+	}
+
+	return c.Viper.GetInt(k)
+}
+
+func (c *Config) GetBool(k string, defaults ...bool) bool {
+	if !c.Viper.InConfig(k) && len(defaults) == 1 {
+		return defaults[0]
+	}
+
+	return c.Viper.GetBool(k)
 }
